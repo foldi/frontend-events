@@ -1,0 +1,136 @@
+<html>
+  <head>
+    <title>Hack Spots</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--<script type="text/javascript" src='http://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.js'></script>-->
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/tabletop.js"></script>
+    <script type="text/javascript" src='scripts/sheetsee.js'></script>
+    <!--<script type="text/javascript" src='scripts/leaflet.markercluster.js'></script>-->
+    <link rel="stylesheet" type="text/css" href="css/sss.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+  </head>
+<body>
+
+  <div class='wrapper'>
+
+    <div id="eventLogo"></div>
+    <div id="selectedEvent"></div>
+
+    <div id="filterContainer">
+      <input id="siteTableFilter" type="text" placeholder="filter by.."></input>
+    </div>
+    <div id="siteTable"></div>
+
+    <div id="info" class="container">
+      <h3>Contribute!</h3>
+      <div id="theNumberofSpots"></div>
+      <p>This website is hooked up to <a href="https://docs.google.com/spreadsheet/ccc?key=0AsxZWWM7rVLodGt1REhjeGhYMDk2SG9nc0JsNGFxb1E#gid=0" target="_blank">this Google Spreadsheet</a>, which I've shared, so click and add your favorite event to the bottom of the list!</p>
+
+      <h3>Fork-n-Go</h3>
+      <p>This is a work-in-progress example of a fork-n-go project - which means, there is just a <a href="https://github.com/jlord/hack-spots" target="_blank">gh-pages branch in GitHub</a> for this project so when you fork it, you've got a live and hosted website instantly. BAM! Just copy the spreadsheet headers and create your own spreadsheet, swap out the spreadsheet key in index.html and commit those changes. BAM! You've got a live and hosted site with a spreadsheet you control. More on the <a href="http://www.github.com/jlord/hack-spots" target="_blank">readme</a>.</p>
+
+    </div>
+
+  </div>
+
+  <script id="eventLogo" type="text/html">
+  {{#rows}}
+    {{pathtologo}}<img src='{{pathtologo}}' class='logo' />{{/pathtologo}}
+  {{/rows}}
+  </script>
+
+  <script id="theNumberofSpots" type="text/html">
+    <p><strong><span class="red-text">{{numberOfSpots}}</span> events strong!</p>
+  </script>
+
+  <script id="selectedEvent" type="text/html">
+    {{#rows}}
+      <div class="fauxButton">SELECTED EVENT</div>
+      <h2>{{name}}</h2>
+      <p class="colorText">{{city}}{{#state}}, {{state}}{{/state}}{{#country}}, {{country}}{{/country}}<p>
+      <ul>
+        {{#description}}<li><span class="category">Description:</span> {{description}}</li>{{/description}}
+        <li><span class="category">Topics:</span> {{#topic1}}{{topic1}}{{/topic1}}{{#topic2}}, {{topic2}}{{/topic2}}{{#topic3}}, {{topic3}} {{/topic3}}</li>
+      </ul>
+      <ul>
+        <li><a href="https://maps.google.com/maps?q={{city}},{{country}}" target="_blank">View in Google Maps</a></li>
+        {{#twitter}}<li><a href="http://www.twitter.com/{{twitter}}">View on Twitter</a>{{/twitter}}
+        {{#github}}<li><a href="{{github}}">View GitHub</a>{{/github}}
+      </ul>
+    {{/rows}}
+  </script>
+
+  <script id="siteTable" type="text/html">
+      <table>
+      <tr>
+        <th class="tHeader">Name</th>
+        <th class="tHeader">City</th>
+        <th class="tHeader">Country</th>
+        <th class="tHeader">Month</th>
+        <th class="tHeader">Links</th>
+      </tr>
+    {{#rows}}
+      <tr id="{{rowNumber}}" class="resultRow">
+        <td>{{name}}</td>
+        <td>{{city}}</td>
+        <td>{{country}}</td>
+        <td>{{month}}</td>
+        <td><a href='http://www.twitter.com/{{twitter}}' class='button'>Twitter</a> <a href='http://lanyrd.com/search/?context=future&q={{name}}' class='button'>Lanyrd</a></td>
+      </tr>
+    {{/rows}}
+    </table>
+  </script>
+
+
+
+
+  <script type='text/javascript'>
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var gData
+      var URL = '0AsxZWWM7rVLodGt1REhjeGhYMDk2SG9nc0JsNGFxb1E'
+      Tabletop.init( { key: URL, callback: myData, simpleSheet: true } )
+    });
+
+    function myData(gData) { // All the sheetsee things you want to do!
+
+      var tableOptions = {
+        'data': gData,
+        'pagination': 10,
+        'tableDiv': '#siteTable',
+        'filterDiv': '#siteTableFilter'
+      }
+      Sheetsee.makeTable(tableOptions);
+      Sheetsee.initiateTableFilter(tableOptions);
+
+      var rows = document.querySelectorAll('.resultRow');
+
+
+
+      // when someone clicks on a row, highlight it
+      $('.resultRow').live("click", function(event) {
+
+        $('.resultRow').removeClass("selectedRow");
+        var rowNumber = $(this).closest("tr").attr("id");
+        $('#' + rowNumber).addClass("selectedRow");
+
+        var dataElement = Sheetsee.getMatches(gData, rowNumber, "rowNumber");
+
+        var selectedEvent = Sheetsee.ich.selectedEvent({
+          rows: dataElement
+        });
+        $('#selectedEvent').html(selectedEvent);
+
+        var eventLogo = Sheetsee.ich.eventLogo({
+          rows: dataElement
+        });
+        console.log(eventLogo);
+        $('#eventLogo').html(eventLogo);
+
+      })
+    }
+
+
+
+  </script>
