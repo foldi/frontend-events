@@ -46,7 +46,7 @@
     {{#rows}}
       <div class="fauxButton">SELECTED EVENT</div>
       <h2>{{name}}</h2>
-      <p class="colorText">{{city}}{{#state}}, {{state}}{{/state}}{{#country}}, {{country}}{{/country}}<p>
+      <p class="colorText">{{#city}}{{city}}, {{/city}}{{#state}} {{state}}, {{/state}}{{#country}}{{country}}{{/country}}<p>
       <ul>
         {{#description}}<li><span class="category">Description:</span> {{description}}</li>{{/description}}
         <li><span class="category">Topics:</span> {{#topic1}}{{topic1}}{{/topic1}}{{#topic2}}, {{topic2}}{{/topic2}}{{#topic3}}, {{topic3}} {{/topic3}}</li>

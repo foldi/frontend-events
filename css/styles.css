@@ -1,9 +1,9 @@
-body { font-family: Helvetica; font-size: .9em;}
+body { font-family: Helvetica; font-size: .9em; margin-top: 20px;}
 .wrapper {width: 90%; margin: 0 auto;}
 
 table {text-align: left; width: 100%}
 th {padding: 10px 0px;}
-td, text {padding: 3px 20px 3px 0px;}
+td, text {padding: 6px 20px 6px 0px;}
 
 #filterContainer { margin-top: 2em; margin-bottom: 0.5em;}
 #siteTableFilter {margin: 12px 0px; border: none; border-bottom: 1px solid #333; background-color: transparent; padding: 0px; font-size: 13px; height: 22px;}
@@ -11,12 +11,12 @@ td, text {padding: 3px 20px 3px 0px;}
 .noMatches {margin-left: 20px; font-size: .8em; font-style: italic; visibility: hidden;}
 
 p a, a {color: #333; text-decoration: none; padding-bottom: 0px; border-bottom: 1px #FD9393 solid;}
-
+a {cursor:pointer;}
 a.button {border: none; text-decoration: none;}
 .button {padding: 5px 5px; background-color: #BEBEBE; font-size: 12px; color: #fff;}
 .button:hover {background: #B9FCFC; color: #47CCFC;}
 
-#Pagination {background: #eee;}
+#Pagination {background: #eee; margin-top: 1em; padding: 1em 0.5em}
 .pagination-next, .pagination-pre {cursor: hand;}
 .no-pag {color: #acacac;}
 
@@ -37,4 +37,5 @@ a.button {border: none; text-decoration: none;}
 #selectedEvent .category { text-transform: uppercase; margin-bottom: 1em; color: #aaa; }
 
 /* event logo */
-#eventLogo { width: 200px; max-width: 100%; display: inline-block;  vertical-align: top; }
+#eventLogo { width: 200px; display: inline-block;  vertical-align: top; }
+#eventLogo img {max-width: 100%; }
