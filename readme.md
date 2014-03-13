@@ -1,6 +1,6 @@
 # Looking for a conference?
 
-This is the code for a website that lists front-end and general web conferences and meetups. You can also [add an event](https://docs.google.com/spreadsheet/ccc?key=0AsxZWWM7rVLodGt1REhjeGhYMDk2SG9nc0JsNGFxb1E)!
+This is the code for [a website](http://foldi.github.io/frontend-events/) that lists front-end and general web conferences and meetups. You can also [add an event](https://docs.google.com/spreadsheet/ccc?key=0AsxZWWM7rVLodGt1REhjeGhYMDk2SG9nc0JsNGFxb1E)!
 
 ### Fork -n- Go!
 
