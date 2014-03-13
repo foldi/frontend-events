@@ -1,6 +1,6 @@
 # Looking for a conference?
 
-This is the code for a website that lists conferences and meetups that myself and my friends have an interest in attending.
+This is the code for a website that lists front-end and general web conferences and meetups.
 
 ### Fork -n- Go!
 
